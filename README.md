@@ -12,9 +12,19 @@ For KiCad *Version: 7.0.0, release build*
 | datasheets | component datasheets                                                 |
 | assets     | board setups, component 3D models, logos                             |
 | scripts    | BOM export plugins, miscellaneous helper scripts for file conversion |
+| hooks      | git hooks, for example for automatic documentation export            |
 
 ## Usage
 Click [![Use this template](https://img.shields.io/badge/-Use_this_template-green.svg)](https://github.com/cyber-murmel/kicad-template/generate) to create a new repository and clone it to your machine.
+
+### Installing Git Hooks (optional)
+The [hooks](hooks) directory contains client-side [git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks).
+Currently only the pre-commit hook is used to automatically export plots.
+
+To enable the hooks for your local repository, `cd` into it and run.
+```shell
+git config core.hooksPath ./hooks
+```
 
 ### Customizing the Template (optional)
 If your project consists of multiple designs, which all should adhere to the same design rules, you can modify the [template](source/template/) first, before creating projects based on it.
