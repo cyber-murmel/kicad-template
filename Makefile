@@ -60,7 +60,7 @@ exports/plots/%-pcb.pdf: source/*/%.kicad_pcb
 	$(Q)rm -r $(tempdir)
 
 production/gbr/%.zip: source/*/%.kicad_pcb
-	$(eval stackup := $(shell $(PCB_HELPER) \
+	$(eval stackup := Edge.Cuts $(shell $(PCB_HELPER) \
 		--pcb source/template/template.kicad_pcb \
 		stackup \
 	))
