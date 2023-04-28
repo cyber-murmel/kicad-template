@@ -3,6 +3,8 @@ KiCad 7 project template with document export automation
 
 For KiCad *Version: 7.0.1, release build*
 
+Browse the files on [KiCanvas](https://kicanvas.org/?github=https://github.com/cyber-murmel/kicad-template/tree/main/source/template) - by [Stargirl Flowers](https://github.com/theacodes)
+
 ## Directory Structure
 | directory  | content                                                              |
 |------------|----------------------------------------------------------------------|
@@ -94,11 +96,11 @@ with KiCad and all other software by running `nix-shell` in the root of this
 repository.
 
 ### Export
-To export all PDFs and Gerbers, simply run
+To export all PDFs and production files, simply run
 ```shell
 make
 ```
-PDFs and Gerbers are exported automatically when you `git commit`, if you have
+PDFs and production files are exported automatically when you `git commit`, if you have
 [Git Hooks](#installing-git-hooks-optional) set up.
 
 ### Installing Git Hooks (optional)
