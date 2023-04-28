@@ -101,14 +101,6 @@ make
 PDFs and Gerbers are exported automatically when you `git commit`, if you have
 [Git Hooks](#installing-git-hooks-optional) set up.
 
-### Pattern
-To recreate the pattern, first remove the pattern from the board and save it,
-then run
-```shell
-make pattern
-```
-Add the new pattern graphic to the board.
-
 ### Installing Git Hooks (optional)
 The [hooks](hooks) directory contains client-side [git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks).
 Currently only the pre-commit hook is used to automatically export plots.
