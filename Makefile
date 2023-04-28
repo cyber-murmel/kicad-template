@@ -46,16 +46,18 @@ exports/plots/%-pcb.pdf: source/*/%.kicad_pcb
 		copper \
 	))
 
-	$(Q)for layer in $(copper); \
+	$(Q)n=0; \
+	for layer in $(copper); \
 	do \
 		$(KICAD_CLI) pcb export pdf \
 			--include-border-title \
 			--layers "$$layer,Edge.Cuts" \
 			"$<" \
-			--output "$(tempdir)/$*-$$layer.pdf"; \
+			--output "$(tempdir)/$$(printf "%02d" $${n})-$*-$$layer.pdf"; \
+		let "n+=1" ; \
 	done
 
-	$(Q)$(PDFUNITE) $(tempdir)/$*-*.pdf "$@" 2>/dev/null
+	$(Q)$(PDFUNITE) $(tempdir)/*-$*-*.pdf "$@" 2>/dev/null
 
 	$(Q)rm -r $(tempdir)
 
