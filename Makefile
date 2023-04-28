@@ -19,19 +19,36 @@ endif
 KICAD_CLI ?= kicad-cli
 PDFUNITE ?= pdfunite
 PCB_HELPER ?= ./scripts/pcb_helper.py
+BOM_HELPER ?= ./scripts/bom_helper.py
+SED ?= sed
+MKDIR ?= mkdir
 
-PLOTS=$(addprefix exports/plots/, $(PROJECTS))
-PLOTS_SCH=$(addsuffix -sch.pdf, $(PLOTS))
-PLOTS_PCB=$(addsuffix -pcb.pdf, $(PLOTS))
-PLOTS_ALL=$(PLOTS_SCH) $(PLOTS_PCB)
+PLOT_DIRS=$(addprefix exports/plots/, $(PROJECTS))
+PLOTS_SCH=$(addsuffix -sch.pdf, $(PLOT_DIRS))
+PLOTS_PCB=$(addsuffix -pcb.pdf, $(PLOT_DIRS))
+PLOTS=$(PLOTS_SCH) $(PLOTS_PCB)
 
 GERBER_DIRS=$(addprefix production/gbr/, $(PROJECTS))
 GERBER_ZIPS=$(addsuffix .zip, $(GERBER_DIRS))
 
+POS = $(addprefix production/pos/, $(addsuffix .csv, $(PROJECTS)))
 
-all: $(PLOTS_ALL) $(GERBER_ZIPS)
+BOMS = $(addprefix production/bom/, $(addsuffix .csv, $(PROJECTS)))
+
+all: $(PLOTS) $(GERBER_ZIPS) $(POS) $(BOMS)
 .PHONY: all
 
+plots: $(PLOTS)
+.PHONY: plots
+
+gerbers: $(GERBER_ZIPS)
+.PHONY: gerbers
+
+pos: $(POS)
+.PHONY: pos
+
+bom: $(BOMS)
+.PHONY: bom
 
 exports/plots/%-sch.pdf: source/*/%.kicad_sch
 	$(Q)$(KICAD_CLI) sch export pdf \
@@ -86,10 +103,37 @@ production/gbr/%.zip: source/*/%.kicad_pcb
 
 	$(Q)zip $@ production/gbr/$*/*
 
+production/pos/%.csv: source/*/%.kicad_pcb
+	$(Q)$(KICAD_CLI) pcb export pos \
+		--format csv \
+		--units mm \
+		"$<" \
+		--output "$@"
+	$(Q)$(SED) \
+		-e 's/Ref/Designator/' \
+		-e 's/PosX/Mid X/' \
+		-e 's/PosY/Mid Y/' \
+		-e 's/Side/Layer/' \
+		-e 's/Rot/Rotation/' \
+		-i "$@"
+
+production/bom/%.csv: source/*/%.kicad_sch
+	$(Q)$(KICAD_CLI) sch export python-bom \
+		"$<" \
+		--output "production/bom/$*.xml"
+	$(Q)$(BOM_HELPER) \
+		--bom "production/bom/$*.xml" \
+		--csv "$@"
+
+source/*/%.net: source/*/%.kicad_sch
+	$(Q)$(KICAD_CLI) sch export netlist \
+		"$<" \
+		--output "source/$*/$*.net"
 
 clean:
-	$(Q)rm -rf $(PLOTS_ALL)
+	$(Q)rm -rf $(PLOTS)
 	$(Q)rm -rf $(GERBER_DIRS)
 	$(Q)rm -rf $(GERBER_ZIPS)
-	$(Q)rm -rf $(PATTERN)
+	$(Q)rm -rf $(POS)
+	$(Q)rm -rf $(BOMS)
 .PHONY: clean
