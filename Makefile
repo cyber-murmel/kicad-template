@@ -42,7 +42,7 @@ exports/plots/%-pcb.pdf: source/*/%.kicad_pcb
 	$(eval tempdir := $(shell mktemp -d))
 
 	$(eval copper := $(shell $(PCB_HELPER) \
-		--pcb source/template/template.kicad_pcb \
+		--pcb "$<" \
 		copper \
 	))
 
@@ -61,7 +61,7 @@ exports/plots/%-pcb.pdf: source/*/%.kicad_pcb
 
 production/gbr/%.zip: source/*/%.kicad_pcb
 	$(eval stackup := Edge.Cuts $(shell $(PCB_HELPER) \
-		--pcb source/template/template.kicad_pcb \
+		--pcb "$<" \
 		stackup \
 	))
 
