@@ -13,15 +13,19 @@ while read -r project_path; do
 	then
 		make "exports/plots/$project_name-pcb.pdf"
 		make "production/gbr/$project_name.zip"
+		make "production/pos/$project_name.csv"
 		git add "exports/plots/$project_name-pcb.pdf"
 		# the directory containing the Gerbers is a side effect of the zip creation
 		git add "production/gbr/$project_name/"
+		git add "production/pos/$project_name.csv"
 	fi
 
 	re="$project_path.*\.kicad_sch"
 	if [[ $files_added =~ $re ]]
 	then
 		make "exports/plots/$project_name-sch.pdf"
+		make "production/bom/$project_name.csv"
 		git add "exports/plots/$project_name-sch.pdf"
+		git add "production/bom/$project_name.csv"
 	fi
 done <<< "$project_paths"
