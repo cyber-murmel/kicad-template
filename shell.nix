@@ -21,6 +21,22 @@ let
     rev = "3f5d3fa0";
     sha256 = "sha256-tmpBW23fVw6TT7oA6ifpccP61d1yeImA/jhhv7tTOgg=";
   };
+
+  duplicateproject = writeScriptBin "duplicateproject" ''
+    set -euxo pipefail
+
+    if [[ $# -ne 2 ]]; then
+        echo "Usage: duplicateproject OLD_NAME NEW_NAME" >&2
+        exit 2
+    fi
+
+    OLD_NAME=$1
+    NEW_NAME=$2
+
+    cp --recursive "$OLD_NAME" "$NEW_NAME"
+    rename "$OLD_NAME" "$NEW_NAME" "$NEW_NAME"/*
+    sed -i -e "s/$OLD_NAME/$NEW_NAME/g" "$NEW_NAME"/"$NEW_NAME".*
+  '';
 in
 mkShell {
   buildInputs = [
@@ -31,5 +47,6 @@ mkShell {
     (python3.withPackages(ps: with ps; [
       sexpdata
     ]))
+    duplicateproject
   ];
 }
