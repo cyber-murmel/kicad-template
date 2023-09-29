@@ -97,7 +97,7 @@ production/gbr/%.zip: source/*/%.kicad_pcb
 	done
 	$(Q)$(KICAD_CLI) pcb export drill \
 		--excellon-separate-th \
-		--units mm \
+		--excellon-units mm \
 		"$<" \
 		--output "production/gbr/$*/"
 
