@@ -1,5 +1,5 @@
 { pkgs ? import
-    (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/988cc958c57ce4350ec248d2d53087777f9e1949.tar.gz")
+    (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/5cfafa1.tar.gz") # nixos-23.05 on 2023-09-30
     { }
 }:
 
@@ -16,10 +16,10 @@ let
       };
     };
   };
-  kicad-7_0_1 = custom_kicad {
-    kicadVersion = "7.0.1";
-    rev = "3f5d3fa0";
-    sha256 = "sha256-tmpBW23fVw6TT7oA6ifpccP61d1yeImA/jhhv7tTOgg=";
+  kicad-7_0_8 = custom_kicad {
+    kicadVersion = "7.0.8";
+    rev = "063d9c830514d46de163bd0ae2bb1df66309f11e";
+    sha256 = "sha256-xOueBxJwS+0LwcYTBJCsbDKWpiTUSv/O8luNCsdAUr0=";
   };
 
   duplicateproject = writeScriptBin "duplicateproject" ''
@@ -40,8 +40,8 @@ let
 in
 mkShell {
   buildInputs = [
-    #kicad # 7.0.0
-    kicad-7_0_1
+    kicad # 7.0.7
+    # kicad-7_0_8
     zip
     poppler_utils
     (python3.withPackages(ps: with ps; [

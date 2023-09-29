@@ -119,23 +119,23 @@ Version information of the KiCad used to generate the files.
 
 Application: kicad-cli x86_64 on x86_64
 
-Version: 7.0.1, release build
+Version: 7.0.7, release build
 
 Libraries:
         wxWidgets 3.2.2
-        FreeType 2.12.1
-        HarfBuzz 6.0.0
+        FreeType 2.13.0
+        HarfBuzz 7.2.0
         FontConfig 2.14.0
-        libcurl/7.87.0 OpenSSL/3.0.8 zlib/1.2.13 brotli/1.0.9 zstd/1.5.2 libidn2/2.3.2 libssh2/1.10.0 nghttp2/1.51.0
+        libcurl/8.1.1 OpenSSL/3.0.10 zlib/1.2.13 brotli/1.0.9 zstd/1.5.5 libidn2/2.3.4 libssh2/1.11.0 nghttp2/1.51.0
 
-Platform: , 64 bit, Little endian, wxBase, , wayland
+Platform: Linux 6.1.47 x86_64, 64 bit, Little endian, wxBase, , wayland
 
 Build Info:
         Date: Jan  1 1980 00:00:00
         wxWidgets: 3.2.2 (wchar_t,wx containers) GTK+ 0.0
         Boost: 1.79.0
         OCC: 7.6.2
-        Curl: 7.87.0
+        Curl: 8.1.1
         ngspice: 37
         Compiler: GCC 12.2.0 with C++ ABI 1017
 
