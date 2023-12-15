@@ -1,5 +1,5 @@
 { pkgs ? import
-    (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/5cfafa1.tar.gz") # nixos-23.05 on 2023-09-30
+    (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/cf28ee258fd5f9a52de6b9865cdb93a1f96d09b7.tar.gz") # nixos-23.11 on 2023-12-15
     { }
 }:
 
