@@ -16,6 +16,10 @@ else
 Q =
 endif
 
+ifeq ("$(SHELL)", "/bin/sh")
+SHELL=/bin/bash
+endif
+
 KICAD_CLI ?= kicad-cli
 PDFUNITE ?= pdfunite
 PCB_HELPER ?= ./scripts/pcb_helper.py
