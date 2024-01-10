@@ -17,7 +17,7 @@ Q =
 endif
 
 ifeq ("$(SHELL)", "/bin/sh")
-SHELL=/bin/bash
+SHELL:=$(shell which bash)
 endif
 
 KICAD_CLI ?= kicad-cli
