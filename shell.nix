@@ -35,7 +35,7 @@ let
 
     cp --recursive "$OLD_NAME" "$NEW_NAME"
     rename "$OLD_NAME" "$NEW_NAME" "$NEW_NAME"/*
-    sed -i -e "s/$OLD_NAME/$NEW_NAME/g" "$NEW_NAME"/"$NEW_NAME".*
+    sed -i -e "s/$OLD_NAME/$NEW_NAME/g" "$NEW_NAME"/"$NEW_NAME".* Makefile
   '';
 in
 mkShell {

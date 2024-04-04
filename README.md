@@ -42,7 +42,7 @@ PROJECT_NAME="my-cool-project"
 
 cp --recursive source/template/ source/"${PROJECT_NAME}"/
 rename "template" "${PROJECT_NAME}" source/"${PROJECT_NAME}"/*
-sed -i -e "s/template/${PROJECT_NAME}/g" source/"${PROJECT_NAME}"/"${PROJECT_NAME}".*
+sed -i -e "s/template/${PROJECT_NAME}/g" source/"${PROJECT_NAME}"/"${PROJECT_NAME}".* Makefile
 ```
 
 ### Customizing the Project (optional)
