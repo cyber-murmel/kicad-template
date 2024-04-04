@@ -1,7 +1,9 @@
 # KiCad Template
-KiCad 7 project template with document export automation
+KiCad 8 project template with document export automation
 
-For KiCad *Version: 7.0.1, release build*
+For KiCad *Version: 8.99.0-77eaa75db1, release build*
+
+<img src="./exports/renderings/template-top.png" width="45%"/> <img src="./exports/renderings/template-bottom.png" width="45%"/>
 
 Browse the files on [KiCanvas](https://kicanvas.org/?github=https://github.com/cyber-murmel/kicad-template/tree/main/source/template) - by [Stargirl Flowers](https://github.com/theacodes)
 
@@ -116,30 +118,28 @@ git config core.hooksPath ./hooks
 Version information of the KiCad used to generate the files.
 ```
 [nix-shell:~/repos/kicad-template]$ kicad-cli version --format about
-
 Application: kicad-cli x86_64 on x86_64
 
-Version: 7.0.7, release build
+Version: 8.99.0-77eaa75db1, release build
 
 Libraries:
-        wxWidgets 3.2.2
-        FreeType 2.13.0
-        HarfBuzz 7.2.0
-        FontConfig 2.14.0
-        libcurl/8.1.1 OpenSSL/3.0.10 zlib/1.2.13 brotli/1.0.9 zstd/1.5.5 libidn2/2.3.4 libssh2/1.11.0 nghttp2/1.51.0
+	wxWidgets 3.2.4
+	FreeType 2.13.2
+	HarfBuzz 8.3.0
+	FontConfig 2.15.0
+	libcurl/8.6.0 OpenSSL/3.0.13 zlib/1.3.1 brotli/1.1.0 zstd/1.5.5 libidn2/2.3.7 libpsl/0.21.5 libssh2/1.11.0 nghttp2/1.60.0
 
-Platform: Linux 6.1.47 x86_64, 64 bit, Little endian, wxBase, , wayland
+Platform: NixOS 23.11 (Tapir), 64 bit, Little endian, wxBase, , wayland
 
 Build Info:
-        Date: Jan  1 1980 00:00:00
-        wxWidgets: 3.2.2 (wchar_t,wx containers) GTK+ 0.0
-        Boost: 1.79.0
-        OCC: 7.6.2
-        Curl: 8.1.1
-        ngspice: 37
-        Compiler: GCC 12.2.0 with C++ ABI 1017
+	Date: Jan  1 1980 00:00:00
+	wxWidgets: 3.2.4 (wchar_t,wx containers) GTK+ 0.0
+	Boost: 1.81.0
+	OCC: 7.6.2
+	Curl: 8.6.0
+	ngspice: 42
+	Compiler: GCC 13.2.0 with C++ ABI 1018
 
 Build settings:
-        KICAD_USE_EGL=ON
-        KICAD_SPICE=ON
+	KICAD_USE_EGL=ON
 ```

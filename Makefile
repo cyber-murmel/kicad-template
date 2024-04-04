@@ -27,10 +27,18 @@ BOM_HELPER ?= ./scripts/bom_helper.py
 SED ?= sed
 MKDIR ?= mkdir
 
-PLOT_DIRS=$(addprefix exports/plots/, $(PROJECTS))
-PLOTS_SCH=$(addsuffix -sch.pdf, $(PLOT_DIRS))
-PLOTS_PCB=$(addsuffix -pcb.pdf, $(PLOT_DIRS))
+PLOT_NAMES=$(addprefix exports/plots/, $(PROJECTS))
+PLOTS_SCH=$(addsuffix -sch.pdf, $(PLOT_NAMES))
+PLOTS_PCB=$(addsuffix -pcb.pdf, $(PLOT_NAMES))
 PLOTS=$(PLOTS_SCH) $(PLOTS_PCB)
+
+RENDER_NAMES=$(addprefix exports/renderings/, $(PROJECTS))
+RENDERS_FRONT=$(addsuffix -top.png, $(RENDER_NAMES))
+RENDERS_BACK=$(addsuffix -bottom.png, $(RENDER_NAMES))
+RENDERS=$(RENDERS_FRONT) $(RENDERS_BACK)
+
+RENDER_WIDTH?=1024
+RENDER_HEIGHT?=1024
 
 GERBER_DIRS=$(addprefix production/gbr/, $(PROJECTS))
 GERBER_ZIPS=$(addsuffix .zip, $(GERBER_DIRS))
@@ -39,7 +47,7 @@ POS = $(addprefix production/pos/, $(addsuffix .csv, $(PROJECTS)))
 
 BOMS = $(addprefix production/bom/, $(addsuffix .csv, $(PROJECTS)))
 
-all: $(PLOTS) $(GERBER_ZIPS) $(POS) $(BOMS)
+all: $(PLOTS) $(RENDERS) $(GERBER_ZIPS) $(POS) $(BOMS)
 .PHONY: all
 
 plots: $(PLOTS)
@@ -81,6 +89,22 @@ exports/plots/%-pcb.pdf: source/*/%.kicad_pcb
 	$(Q)$(PDFUNITE) $(tempdir)/*-$*-*.pdf "$@" 2>/dev/null
 
 	$(Q)rm -r $(tempdir)
+
+exports/renderings/%-top.png: source/*/%.kicad_pcb
+	$(Q)$(KICAD_CLI) pcb render \
+		"$<" \
+		--width $(RENDER_WIDTH) \
+		--height $(RENDER_HEIGHT) \
+		--side top \
+		--output "$@"
+
+exports/renderings/%-bottom.png: source/*/%.kicad_pcb
+	$(Q)$(KICAD_CLI) pcb render \
+		"$<" \
+		--width $(RENDER_WIDTH) \
+		--height $(RENDER_HEIGHT) \
+		--side bottom \
+		--output "$@"
 
 production/gbr/%.zip: source/*/%.kicad_pcb
 	$(eval stackup := Edge.Cuts $(shell $(PCB_HELPER) \
@@ -136,6 +160,7 @@ source/*/%.net: source/*/%.kicad_sch
 
 clean:
 	$(Q)rm -rf $(PLOTS)
+	$(Q)rm -rf $(RENDERS)
 	$(Q)rm -rf $(GERBER_DIRS)
 	$(Q)rm -rf $(GERBER_ZIPS)
 	$(Q)rm -rf $(POS)
