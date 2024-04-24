@@ -1,5 +1,5 @@
 let
-  nixpkgs_rev = "10dcd43016cd9d1c5a9e691343a8ecd22f641e4d";
+  nixpkgs_rev = "d171375d7786e41160a9cb0a226a99ee68738c14"; # "master" on 2024-04-24
   nixpkgs_src = (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/${nixpkgs_rev}.tar.gz");
 in
 
@@ -11,7 +11,7 @@ with pkgs;
 let
   kicad-8_0_1 = kicad-unstable;
 
-  custom_kicad = { kicadVersion, rev, sha256 }: kicad-unstable.override {
+  custom_kicad = { package ? kicad-unstable-small, kicadVersion, rev, sha256 }: package.override {
     srcs = {
       inherit kicadVersion;
       kicad = fetchFromGitLab {
