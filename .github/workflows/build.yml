@@ -17,8 +17,8 @@ jobs:
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
     - name: 🏗️ Build Template Board
       run: nix-build
-    # - name: 📦 Upload result
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: template
-    #     path: result/*
+    - name: 📦 Upload result
+      uses: actions/upload-artifact@v3
+      with:
+        name: template
+        path: result/*
