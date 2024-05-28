@@ -31,3 +31,6 @@ fp-info-cache
 
 # Project Local Settings
 *.kicad_prl
+
+# Nix
+result
