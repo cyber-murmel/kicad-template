@@ -1,5 +1,6 @@
 let
-  nixpkgs_rev = "d171375d7786e41160a9cb0a226a99ee68738c14"; # "master" on 2024-04-24
+  #nixpkgs_rev = "bfb7a882678e518398ce9a31a881538679f6f092"; # "nixos-unstable" on 2024-05-28
+  nixpkgs_rev = "67a8b308bae9c26be660ccceff3e53a65e01afe1"; # "nixos-24.05" on 2024-05-28
   nixpkgs_src = (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/${nixpkgs_rev}.tar.gz");
 in
 
@@ -9,8 +10,6 @@ in
 
 with pkgs;
 let
-  kicad-8_0_1 = kicad-unstable;
-
   custom_kicad = { package ? kicad-unstable-small, kicadVersion, rev, sha256 }: package.override {
     srcs = {
       inherit kicadVersion;
@@ -47,8 +46,8 @@ let
 in
 mkShell {
   buildInputs = [
-    # kicad-8_0_1
-    kicad-master
+    # kicad-master
+    kicad-small
     zip
     poppler_utils
     (python3.withPackages (ps: with ps; [

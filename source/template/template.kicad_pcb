@@ -1,7 +1,7 @@
 (kicad_pcb
-	(version 20240225)
+	(version 20240108)
 	(generator "pcbnew")
-	(generator_version "8.99")
+	(generator_version "8.0")
 	(general
 		(thickness 1.6)
 		(legacy_teardrops no)
@@ -108,7 +108,6 @@
 			(hpglpendiameter 15.000000)
 			(pdf_front_fp_property_popups yes)
 			(pdf_back_fp_property_popups yes)
-			(pdf_metadata yes)
 			(dxfpolygonmode yes)
 			(dxfimperialunits yes)
 			(dxfusepcbnewfont yes)
@@ -140,7 +139,7 @@
 		(descr "KiCad Logo")
 		(tags "Logo KiCad")
 		(property "Reference" "REF**"
-			(at 0 -22.86 360)
+			(at 0 -22.86 0)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "6adbdd28-597e-4523-99fb-bebef2e71885")
@@ -152,7 +151,7 @@
 			)
 		)
 		(property "Value" "KiCad-Logo_40mm_SilkScreen"
-			(at 0.75 22.86 360)
+			(at 0.75 22.86 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "2a4b4434-7bd7-4b44-9a22-6840dfda5581")

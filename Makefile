@@ -27,15 +27,20 @@ BOM_HELPER ?= ./scripts/bom_helper.py
 SED ?= sed
 MKDIR ?= mkdir
 
+KICAD_VERSION = $(shell ${KICAD_CLI} version --format commit)
+KICAD_RENDER_VERSION = 77eaa75db1f310ba31913102655ff3169b687c6e
+
 PLOT_NAMES=$(addprefix exports/plots/, $(PROJECTS))
 PLOTS_SCH=$(addsuffix -sch.pdf, $(PLOT_NAMES))
 PLOTS_PCB=$(addsuffix -pcb.pdf, $(PLOT_NAMES))
 PLOTS=$(PLOTS_SCH) $(PLOTS_PCB)
 
+ifeq ("$(KICAD_VERSION)", "$(KICAD_RENDER_VERSION)")
 RENDER_NAMES=$(addprefix exports/renderings/, $(PROJECTS))
 RENDERS_FRONT=$(addsuffix -top.png, $(RENDER_NAMES))
 RENDERS_BACK=$(addsuffix -bottom.png, $(RENDER_NAMES))
 RENDERS=$(RENDERS_FRONT) $(RENDERS_BACK)
+endif
 
 RENDER_WIDTH?=1024
 RENDER_HEIGHT?=1024
@@ -90,6 +95,7 @@ exports/plots/%-pcb.pdf: source/*/%.kicad_pcb
 
 	$(Q)rm -r $(tempdir)
 
+ifeq ("$(KICAD_VERSION)", "$(KICAD_RENDER_VERSION)")
 exports/renderings/%-top.png: source/*/%.kicad_pcb
 	$(Q)$(KICAD_CLI) pcb render \
 		"$<" \
@@ -105,6 +111,7 @@ exports/renderings/%-bottom.png: source/*/%.kicad_pcb
 		--height $(RENDER_HEIGHT) \
 		--side bottom \
 		--output "$@"
+endif
 
 production/gbr/%.zip: source/*/%.kicad_pcb
 	$(eval stackup := Edge.Cuts $(shell $(PCB_HELPER) \
