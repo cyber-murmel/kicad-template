@@ -117,17 +117,16 @@ git config core.hooksPath ./hooks
 ## KiCad Version
 Version information of the KiCad used to generate the files.
 ```
-[nix-shell:~/repos/kicad-template]$ kicad-cli version --format about
 Application: kicad-cli x86_64 on x86_64
 
-Version: 8.99.0-77eaa75db1, release build
+Version: 8.0.2, release build
 
 Libraries:
 	wxWidgets 3.2.4
 	FreeType 2.13.2
-	HarfBuzz 8.3.0
+	HarfBuzz 8.4.0
 	FontConfig 2.15.0
-	libcurl/8.6.0 OpenSSL/3.0.13 zlib/1.3.1 brotli/1.1.0 zstd/1.5.5 libidn2/2.3.7 libpsl/0.21.5 libssh2/1.11.0 nghttp2/1.60.0
+	libcurl/8.7.1 OpenSSL/3.0.13 zlib/1.3.1 brotli/1.1.0 zstd/1.5.6 libidn2/2.3.7 libpsl/0.21.5 libssh2/1.11.0 nghttp2/1.61.0
 
 Platform: NixOS 23.11 (Tapir), 64 bit, Little endian, wxBase, , wayland
 
@@ -136,7 +135,7 @@ Build Info:
 	wxWidgets: 3.2.4 (wchar_t,wx containers) GTK+ 0.0
 	Boost: 1.81.0
 	OCC: 7.6.2
-	Curl: 8.6.0
+	Curl: 8.7.1
 	ngspice: 42
 	Compiler: GCC 13.2.0 with C++ ABI 1018
 
