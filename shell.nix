@@ -46,8 +46,8 @@ let
 in
 mkShell {
   buildInputs = [
-    # kicad-master
-    kicad-small
+    kicad-master
+    # kicad-small
     zip
     poppler_utils
     (python3.withPackages (ps: with ps; [
