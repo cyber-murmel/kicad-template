@@ -22,7 +22,7 @@ let
     };
   };
 
-  kicad-master = custom_kicad {
+  kicad-render = custom_kicad {
     kicadVersion = "2024-04-02";
     rev = "77eaa75db1f310ba31913102655ff3169b687c6e";
     sha256 = "sha256-6o85J9IkIslUXm8/fROl399BqXqTyZdvKgUNQzZIxUI=";
@@ -46,7 +46,7 @@ let
 in
 mkShell {
   buildInputs = [
-    kicad-master
+    kicad-render
     # kicad-small
     zip
     poppler_utils

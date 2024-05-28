@@ -8,6 +8,25 @@ in
 }:
 
 with pkgs;
+let
+  custom_kicad = { package ? kicad-unstable-small, kicadVersion, rev, sha256 }: package.override {
+    srcs = {
+      inherit kicadVersion;
+      kicad = fetchFromGitLab {
+        group = "kicad";
+        owner = "code";
+        repo = "kicad";
+        inherit rev sha256;
+      };
+    };
+  };
+
+  kicad-render = custom_kicad {
+    kicadVersion = "2024-04-02";
+    rev = "77eaa75db1f310ba31913102655ff3169b687c6e";
+    sha256 = "sha256-6o85J9IkIslUXm8/fROl399BqXqTyZdvKgUNQzZIxUI=";
+  };
+in
 stdenv.mkDerivation rec {
   pname = "template";
   version = "";
@@ -34,7 +53,8 @@ stdenv.mkDerivation rec {
 
     mkdir $out
 
-    cp exports/plots/* $out
+    cp exports/plots/*.pdf $out
+    cp exports/renderings/*.png $out
     cp production/gbr/${pname}.zip $out/${pname}-gbr.zip
     cp production/bom/${pname}.csv $out/${pname}-bom.csv
     cp production/pos/${pname}.csv $out/${pname}-pos.csv
@@ -43,7 +63,7 @@ stdenv.mkDerivation rec {
   '';
 
   buildInputs = [
-    kicad-small
+    kicad-render
     zip
     poppler_utils
     (python3.withPackages (ps: with ps; [
